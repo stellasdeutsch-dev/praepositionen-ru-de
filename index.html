@@ -335,6 +335,64 @@ footer{padding-block:28px calc(28px + 66px);text-align:center;font-size:13px;col
 footer a{color:var(--ink);font-weight:700;transition:color .2s}footer a:hover{color:var(--red)}
 footer .brand{justify-content:center;margin-bottom:8px;color:var(--ink);text-align:left}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+/* Topic visuals: inline SVG art with HTML labels, so labels keep their size on a phone. */
+.vz{margin-top:clamp(28px,3.6vw,48px);background:#fff;border-radius:16px;box-shadow:var(--sh);overflow:hidden;transition:box-shadow .25s,translate .25s}
+.vz:hover{box-shadow:var(--sh2);translate:0 -3px}
+.vz-stage{position:relative;aspect-ratio:1000/430;background:var(--soft)}
+.vz-stage>svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.vz figcaption{padding:15px clamp(16px,2.4vw,26px) 17px;color:var(--ink2);font-size:14.5px;line-height:1.4;text-align:center;text-wrap:pretty}
+.vz-at{position:absolute;left:var(--x);top:var(--y);translate:-50% -50%}
+.vz-tag{background:var(--ink);color:#fff;border-radius:9px;padding:6px 12px;font-weight:800;font-size:clamp(13px,1.35vw,16px);line-height:1.15;white-space:nowrap;text-align:center}
+.vz-tag.r{background:var(--red)}
+.vz-tag.y{background:var(--yellow);color:var(--ink)}
+.vz-tag.w{background:#fff;color:var(--ink);box-shadow:var(--sh)}
+.vz-float{animation:vzFloat 4.2s ease-in-out infinite alternate}
+.vz-float.b{animation-duration:5.4s}
+@keyframes vzFloat{from{transform:translateY(-6px)}to{transform:translateY(6px)}}
+.vz-shake{animation:vzShake .32s linear infinite alternate}
+@keyframes vzShake{from{transform:translateX(-2px)}to{transform:translateX(2px)}}
+/* two-up scene */
+.vz-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px;background:var(--line)}
+.vz-pn{background:#fff;display:flex;flex-direction:column}
+.vz-pn .vz-stage{aspect-ratio:500/320}
+.vz-cap{padding:13px clamp(14px,2vw,20px) 15px;text-align:center;display:grid;gap:2px}
+.vz-cap b{font-weight:800;font-size:clamp(16px,1.6vw,19px);line-height:1.25}
+.vz-cap span{color:var(--mute);font-size:14px;line-height:1.3}
+.vz-cap .no{color:var(--red)}
+.vz-cap .ok{color:var(--green)}
+/* signpost */
+.vz-sign{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);align-items:stretch}
+.vz-sp{background:var(--soft);display:grid;align-items:end;overflow:hidden}
+.vz-sign .vz-stage{aspect-ratio:320/340;width:100%;max-width:400px;margin-inline:auto;background:transparent}
+.vz-al{font-weight:800;font-size:clamp(15px,1.5vw,18px);line-height:1;color:#fff}
+.vz-al.d{color:var(--ink)}
+.vz-arms{display:grid;gap:10px;padding:clamp(16px,2.4vw,26px);align-content:center}
+.vz-arm{display:grid;grid-template-columns:62px minmax(0,1fr);align-items:center;gap:12px;background:var(--soft);padding:10px 14px;border-radius:12px}
+.vz-arm i{font-style:normal;display:grid;place-items:center;min-height:38px;border-radius:9px;background:var(--ink);color:#fff;font-weight:800;font-size:17px;line-height:1}
+.vz-arm:nth-child(1) i{background:var(--red)}
+.vz-arm:nth-child(2) i{background:var(--yellow);color:var(--ink)}
+.vz-arm:nth-child(4) i{background:var(--green)}
+.vz-arm b{font-weight:800;font-size:clamp(15px,1.45vw,17px);line-height:1.25;display:block}
+.vz-arm span{color:var(--mute);font-size:14px;line-height:1.3;display:block}
+/* word-for-word pictures */
+.vz-lit{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;background:var(--line)}
+.vz-lit .vz-cap b{font-size:clamp(15px,1.35vw,16.5px)}
+.vz-lit svg{display:block;width:100%;height:auto;background:var(--soft)}
+.vz-lit .vz-pn{min-width:0}
+/* timeline */
+.vz-tl{position:relative;aspect-ratio:1000/400;background:var(--soft)}
+.vz-tl>svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.vz-tlk{display:none}
+@media(max-width:860px){.vz-lit{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){
+  .vz-stage.sl{aspect-ratio:auto;height:270px}
+  .vz-at{left:var(--mx,var(--x));top:var(--my,var(--y))}
+  .vz-two{grid-template-columns:minmax(0,1fr)}
+  .vz-sign{grid-template-columns:minmax(0,1fr)}
+  .vz-sign .vz-stage{max-width:270px}
+  .vz-arm{grid-template-columns:54px minmax(0,1fr);padding:9px 11px}
+  .vz-tl{aspect-ratio:auto;height:300px}
+}
 </style>
 
 </head>
@@ -418,6 +476,57 @@ footer .brand{justify-content:center;margin-bottom:8px;color:var(--ink);text-ali
         <p>Папа кладёт вилку. Говорит, <span class="de" lang="de">viel Glück</span>.</p>
       </div>
     </article>
+    <figure class="vz rv">
+      <div class="vz-two">
+        <div class="vz-pn">
+          <div class="vz-stage">
+            <svg viewBox="0 0 500 320" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Человек стоит внутри унитаза, снаружи видны голова и плечи">
+              <rect width="500" height="320" fill="#F4F5F7"/>
+              <g fill="none" stroke="#E7E8EC" stroke-width="2"><path d="M0 70h500M0 140h500M0 210h500M70 0v260M140 0v260M210 0v260M280 0v260M350 0v260M420 0v260"/></g>
+              <rect y="262" width="500" height="58" fill="#E7E8EC"/>
+              <rect x="346" y="96" width="92" height="104" rx="5" fill="#fff" stroke="#1D1D21" stroke-width="7"/><rect x="336" y="86" width="112" height="16" rx="6" fill="#1D1D21"/><rect x="360" y="120" width="24" height="8" rx="4" fill="#EE2D32"/><path d="M346 198h-20v16" fill="none" stroke="#1D1D21" stroke-width="9"/>
+              <g data-vi="up" data-d=".25">
+                <path d="M172 216c0-46 18-62 54-66h28c36 4 54 20 54 66z" fill="#FFC11E"/>
+                <rect x="222" y="116" width="36" height="40" fill="#E0AE8A"/>
+                <circle cx="240" cy="92" r="46" fill="#F0C7A6"/>
+                <path d="M194 90c-6-60 90-72 96-8-20-22-66-30-96 8z" fill="#1D1D21"/>
+                <circle cx="258" cy="96" r="5.6" fill="#1D1D21"/><circle cx="222" cy="96" r="5.6" fill="#1D1D21"/>
+                <ellipse cx="240" cy="120" rx="9" ry="11" fill="#fff" stroke="#EE2D32" stroke-width="4"/>
+                <path d="M162 196c-14-22-22-44-22-68M318 196c14-22 22-44 22-68" fill="none" stroke="#FFC11E" stroke-width="20" stroke-linecap="round"/>
+                <circle cx="140" cy="122" r="12" fill="#F0C7A6"/><circle cx="340" cy="122" r="12" fill="#F0C7A6"/>
+              </g>
+              <path d="M136 204h208c8 62-30 96-58 108h-92c-28-12-66-46-58-108z" fill="#fff" stroke="#1D1D21" stroke-width="7"/>
+              <rect x="124" y="192" width="232" height="26" rx="13" fill="#fff" stroke="#1D1D21" stroke-width="7"/>
+            </svg>
+            <span class="vz-at vz-tag w" lang="de" style="--x:18%;--y:16%" data-vi="pop" data-d=".7">viel Glück</span>
+          </div>
+          <div class="vz-cap"><b class="de no" lang="de">in die Toilette</b><span>Внутрь. Туда я и пообещал залезть.</span></div>
+        </div>
+        <div class="vz-pn">
+          <div class="vz-stage">
+            <svg viewBox="0 0 500 320" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Человек спокойно идёт к закрытой двери туалета">
+              <rect width="500" height="320" fill="#F4F5F7"/>
+              <rect y="262" width="500" height="58" fill="#E7E8EC"/>
+              <rect x="276" y="34" width="162" height="228" rx="10" fill="#1D1D21"/>
+              <rect x="290" y="48" width="134" height="214" rx="5" fill="#EE2D32"/>
+              <circle cx="404" cy="162" r="9" fill="#FFC11E"/>
+              <g fill="#fff"><circle cx="357" cy="86" r="11"/><path d="M341 104c0-5 5-7 16-7s16 2 16 7v34h-8v30h-8v-30h-1v30h-8v-30h-7z"/></g>
+              <g data-vi="walk" data-d=".2">
+                <rect x="150" y="196" width="22" height="68" rx="11" fill="#1D1D21"/><rect x="186" y="196" width="22" height="68" rx="11" fill="#1D1D21"/>
+                <rect x="132" y="112" width="96" height="104" rx="30" fill="#FFC11E"/>
+                <rect x="162" y="86" width="36" height="36" fill="#E0AE8A"/>
+                <circle cx="180" cy="66" r="42" fill="#F0C7A6"/>
+                <path d="M138 64c-6-54 82-66 88-8-18-20-60-28-88 8z" fill="#1D1D21"/>
+                <circle cx="198" cy="68" r="5.2" fill="#1D1D21"/><circle cx="164" cy="68" r="5.2" fill="#1D1D21"/>
+                <path d="M170 88c8 7 16 7 22 0" fill="none" stroke="#C4574C" stroke-width="3.6" stroke-linecap="round"/>
+              </g>
+            </svg>
+          </div>
+          <div class="vz-cap"><b class="de ok" lang="de">auf die Toilette</b><span>Мне нужно в туалет. Дословно: на туалет.</span></div>
+        </div>
+      </div>
+      <figcaption>Я сказал <span class="de" lang="de">in</span>. Папа положил вилку.</figcaption>
+    </figure>
     <div class="twin">
       <div class="ex"><span class="de" lang="de">Ich muss in die Toilette.</span><button class="say" type="button" data-say="Ich muss in die Toilette." aria-label="Послушать по-немецки"><svg class="ic"><use href="#i-volume-2"/></svg></button><span class="ru">Так я пообещал залезть в сам унитаз.</span></div>
       <div class="ex"><span class="de" lang="de">Ich muss auf die Toilette.</span><button class="say" type="button" data-say="Ich muss auf die Toilette." aria-label="Послушать по-немецки"><svg class="ic"><use href="#i-volume-2"/></svg></button><span class="ru">Мне нужно в туалет. Дословно: на туалет.</span></div>
@@ -497,6 +606,35 @@ footer .brand{justify-content:center;margin-bottom:8px;color:var(--ink);text-ali
       </div>
     </div>
 
+    <figure class="vz rv">
+      <div class="vz-sign">
+        <div class="vz-sp"><div class="vz-stage">
+        <svg viewBox="0 0 320 340" style="overflow:visible" role="img" aria-label="Дорожный указатель с четырьмя стрелками в разные стороны">
+          <rect x="-400" y="286" width="1120" height="400" fill="#E7E8EC"/>
+          <ellipse cx="160" cy="296" rx="70" ry="10" fill="#D5D6DC"/>
+          <path d="M42 286c4-26 18-36 30-36s26 10 32 36zM214 286c6-34 22-46 36-46s30 12 36 46z" fill="#1F9A62"/>
+          <rect x="152" y="28" width="16" height="266" rx="6" fill="#1D1D21"/>
+          <g data-vi="right" data-d=".15"><path d="M160 44h108l28 22-28 22H160z" fill="#EE2D32"/></g>
+          <g data-vi="left" data-d=".3"><path d="M160 96H52L24 118l28 22h108z" fill="#FFC11E"/></g>
+          <g data-vi="right" data-d=".45"><path d="M160 148h96l28 22-28 22h-96z" fill="#1D1D21"/></g>
+          <g data-vi="left" data-d=".6"><path d="M160 200H64l-28 22 28 22h96z" fill="#1F9A62"/></g>
+          <circle cx="160" cy="24" r="12" fill="#FFC11E"/>
+          <g class="vz-float"><rect x="16" y="20" width="60" height="32" rx="16" fill="#fff"/><circle cx="34" cy="26" r="14" fill="#fff"/><circle cx="56" cy="24" r="17" fill="#fff"/></g>
+        </svg>
+        <span class="vz-at vz-al" lang="de" style="--x:68%;--y:19.5%" data-vi="right" data-d=".15">nach</span>
+        <span class="vz-at vz-al d" lang="de" style="--x:32%;--y:34.8%" data-vi="left" data-d=".3">in</span>
+        <span class="vz-at vz-al" lang="de" style="--x:66%;--y:50%" data-vi="right" data-d=".45">auf</span>
+        <span class="vz-at vz-al" lang="de" style="--x:33%;--y:65.3%" data-vi="left" data-d=".6">zu</span>
+        </div></div>
+        <div class="vz-arms">
+          <div class="vz-arm" data-vi="left" data-d=".2"><i lang="de">nach</i><div><b class="de" lang="de">nach Deutschland</b><span>нет артикля</span></div></div>
+          <div class="vz-arm" data-vi="left" data-d=".35"><i lang="de">in</i><div><b class="de" lang="de">in die Schweiz</b><span>есть артикль</span></div></div>
+          <div class="vz-arm" data-vi="left" data-d=".5"><i lang="de">auf</i><div><b class="de" lang="de">auf die Kanaren</b><span>остров</span></div></div>
+          <div class="vz-arm" data-vi="left" data-d=".65"><i lang="de">zu</i><div><b class="de" lang="de">zur Post</b><span>к человеку и до двери</span></div></div>
+        </div>
+      </div>
+      <figcaption>Сначала смотри, куда едешь. Предлог стоит на указателе.</figcaption>
+    </figure>
     <div class="sc" id="door-w">
       <div id="door" style="scroll-margin-top:90px">
         <span class="tag"><svg class="ic"><use href="#i-house"/></svg>Где</span>
@@ -525,6 +663,25 @@ footer .brand{justify-content:center;margin-bottom:8px;color:var(--ink);text-ali
       </div>
     </div>
 
+    <figure class="vz rv">
+      <div class="vz-lit">
+        <div class="vz-pn"><svg viewBox="0 0 250 180" aria-hidden="true"><rect width="250" height="180" fill="#F4F5F7"/><rect y="136" width="250" height="44" fill="#E7E8EC"/><path d="M0 150h250" stroke="#74747E" stroke-width="3" stroke-dasharray="14 10"/>
+<g data-vi="right" data-d=".2"><rect x="116" y="52" width="16" height="30" fill="#1D1D21"/><rect x="108" y="44" width="32" height="12" rx="4" fill="#1D1D21"/><path d="M106 136V90a14 14 0 0 1 14-14h56v60z" fill="#EE2D32"/><rect x="146" y="88" width="24" height="24" rx="4" fill="#fff"/><rect x="184" y="76" width="66" height="60" fill="#FFC11E"/><rect x="194" y="88" width="24" height="24" rx="4" fill="#fff"/><rect x="226" y="88" width="24" height="24" rx="4" fill="#fff"/><circle cx="128" cy="140" r="11" fill="#1D1D21"/><circle cx="160" cy="140" r="11" fill="#1D1D21"/><circle cx="212" cy="140" r="11" fill="#1D1D21"/></g>
+<g><rect x="53.0" y="106.4" width="8.8" height="39.6" rx="3" fill="#1D1D21"/><rect x="66.2" y="106.4" width="8.8" height="39.6" rx="3" fill="#1D1D21"/><rect x="40.9" y="86.7" width="46.2" height="48.4" rx="15.4" fill="#FFC11E"/><circle cx="64" cy="62.4" r="26.4" fill="#F0C7A6"/><path d="M37.6 60.4c-3.4 -34.3 52.8 -40.9 55.4 -4.8c-11.9 -13.2 -38.3 -17.2 -55.4 4.8z" fill="#1D1D21"/><circle cx="74.0" cy="64.5" r="3.2" fill="#1D1D21"/><circle cx="54.5" cy="64.5" r="3.2" fill="#1D1D21"/><path d="M57.1 75.1c5.3 5.3 11.6 5.3 14.8 0" fill="none" stroke="#C4574C" stroke-width="3" stroke-linecap="round"/></g><path d="M88 104h22" stroke="#FFC11E" stroke-width="13" stroke-linecap="round"/></svg><div class="vz-cap"><b class="de" lang="de">mit dem Zug</b><span>Дословно: с поездом</span></div></div>
+        <div class="vz-pn"><svg viewBox="0 0 250 180" aria-hidden="true"><rect width="250" height="180" fill="#F4F5F7"/><rect y="124" width="250" height="56" fill="#BFE0F2"/><path d="M0 142h44M196 142h54M12 160h60M170 160h60" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+<path d="M0 124h58v56H0zM192 124h58v56h-58z" fill="#E7E8EC"/>
+<g data-vi="pop" data-d=".2"><rect x="10" y="88" width="34" height="36" fill="#FFC11E"/><path d="M4 92l23-26 23 26z" fill="#EE2D32"/><rect x="21" y="102" width="12" height="22" fill="#1D1D21"/></g>
+<g data-vi="pop" data-d=".35"><rect x="196" y="50" width="22" height="74" fill="#1D1D21"/><rect x="220" y="72" width="24" height="52" fill="#EE2D32"/><g fill="#FFC11E"><rect x="201" y="60" width="5" height="7"/><rect x="209" y="60" width="5" height="7"/><rect x="201" y="74" width="5" height="7"/><rect x="209" y="74" width="5" height="7"/><rect x="201" y="88" width="5" height="7"/><rect x="209" y="88" width="5" height="7"/><rect x="226" y="82" width="5" height="7"/><rect x="235" y="82" width="5" height="7"/><rect x="226" y="96" width="5" height="7"/><rect x="235" y="96" width="5" height="7"/></g></g>
+<path d="M54 124c34-56 108-56 142 0" fill="none" stroke="#1D1D21" stroke-width="9"/><rect x="50" y="118" width="150" height="10" rx="4" fill="#1D1D21"/><path d="M84 84v34M124 70v48M164 84v34" stroke="#1D1D21" stroke-width="5"/></svg><div class="vz-cap"><b class="de" lang="de">durch eine Brücke</b><span>Дословно: через мост</span></div></div>
+        <div class="vz-pn"><svg viewBox="0 0 250 180" aria-hidden="true"><rect width="250" height="180" fill="#F4F5F7"/><rect y="148" width="250" height="32" fill="#E7E8EC"/>
+<g data-vi="up" data-d=".25"><g><rect x="115.0" y="84.0" width="8.0" height="36.0" rx="3" fill="#1D1D21"/><rect x="127.0" y="84.0" width="8.0" height="36.0" rx="3" fill="#1D1D21"/><rect x="104.0" y="66.1" width="42.0" height="44.0" rx="14.0" fill="#FFC11E"/><circle cx="125" cy="44.0" r="24.0" fill="#F0C7A6"/><path d="M101.0 42.0c-3.1 -31.2 48.0 -37.2 50.4 -4.3c-10.8 -12.0 -34.8 -15.6 -50.4 4.3z" fill="#1D1D21"/><circle cx="134.1" cy="45.9" r="2.9" fill="#1D1D21"/><circle cx="116.4" cy="45.9" r="2.9" fill="#1D1D21"/><path d="M118.8 55.5c4.8 4.8 10.6 4.8 13.4 0" fill="none" stroke="#C4574C" stroke-width="3" stroke-linecap="round"/></g><path d="M100 88C86 70 80 58 76 44M150 88c14-18 20-30 24-44" fill="none" stroke="#FFC11E" stroke-width="13" stroke-linecap="round"/><circle cx="76" cy="40" r="9" fill="#F0C7A6"/><circle cx="174" cy="40" r="9" fill="#F0C7A6"/></g>
+<path d="M66 92h118v60H66z" fill="#C98A4B"/><path d="M66 92l-24-20 22-10 24 30zM184 92l24-20-22-10-24 30z" fill="#A86F39"/><rect x="66" y="92" width="118" height="12" fill="#A86F39"/><rect x="112" y="112" width="26" height="22" rx="3" fill="#FFC11E"/></svg><div class="vz-cap"><b class="de" lang="de">aus diesem Grund</b><span>Дословно: из этой причины</span></div></div>
+        <div class="vz-pn"><svg viewBox="0 0 250 180" aria-hidden="true"><rect width="250" height="180" fill="#F4F5F7"/><rect y="148" width="250" height="32" fill="#E7E8EC"/>
+<g data-vi="pop" data-d=".2"><path d="M116 150V70c0-68 124-68 124 0v80l-20-14-20 14-22-14-20 14-22-14z" fill="#1D1D21"/><circle cx="162" cy="74" r="12" fill="#fff"/><circle cx="204" cy="74" r="12" fill="#fff"/><circle cx="158" cy="76" r="5" fill="#EE2D32"/><circle cx="200" cy="76" r="5" fill="#EE2D32"/><path d="M152 108c8-10 16-10 22-2 6-8 16-8 22 0" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/></g>
+<g class="vz-shake"><g><rect x="52.4" y="117.4" width="7.7" height="34.6" rx="3" fill="#1D1D21"/><rect x="63.9" y="117.4" width="7.7" height="34.6" rx="3" fill="#1D1D21"/><rect x="41.8" y="100.2" width="40.3" height="42.2" rx="13.4" fill="#FFC11E"/><circle cx="62" cy="79.03999999999999" r="23.04" fill="#F0C7A6"/><path d="M38.96 77.03999999999999c-3.0 -30.0 46.1 -35.7 48.4 -4.1c-10.4 -11.5 -33.4 -15.0 -48.4 4.1z" fill="#1D1D21"/><circle cx="70.8" cy="80.9" r="2.8" fill="#1D1D21"/><circle cx="53.7" cy="80.9" r="2.8" fill="#1D1D21"/><path d="M56.0 90.1c4.6 4.6 10.1 4.6 12.9 0" fill="none" stroke="#C4574C" stroke-width="3" stroke-linecap="round"/></g></g></svg><div class="vz-cap"><b class="de" lang="de">vor Angst</b><span>Дословно: перед страхом</span></div></div>
+      </div>
+      <figcaption>Вот что немец говорит на самом деле. Просто прими.</figcaption>
+    </figure>
     <div class="sc">
       <div>
         <span class="tag"><svg class="ic"><use href="#i-link"/></svg>Склейка</span>
@@ -547,6 +704,49 @@ footer .brand{justify-content:center;margin-bottom:8px;color:var(--ink);text-ali
       <article class="ms rv"><h3>Откуда</h3><p class="bad" lang="de">aus der Arbeit</p><p class="good" lang="de"><span>von der Arbeit</span><button class="say" type="button" data-say="von der Arbeit" aria-label="Послушать по-немецки"><svg class="ic"><use href="#i-volume-2"/></svg></button></p><p class="tr">Иду с работы.</p><ul><li><span>Вернулась с дела, значит <span class="de" lang="de">von</span></span></li><li><span><span class="de" lang="de">vom Sport</span>, со спорта</span></li><li><span><span class="de" lang="de">von der Post</span>, с почты</span></li></ul></article>
       <article class="ms rv"><h3>Возраст</h3><p class="bad" lang="de">in 20 Jahren</p><p class="good" lang="de"><span>mit 20 Jahren</span><button class="say" type="button" data-say="mit 20 Jahren" aria-label="Послушать по-немецки"><svg class="ic"><use href="#i-volume-2"/></svg></button></p><p class="tr">В 20 лет.</p><ul><li><span><span class="de" lang="de">in 20 Jahren</span> значит через 20 лет</span></li><li><span><span class="de" lang="de">über 90 Jahre alt</span>, старше 90</span></li><li><span><span class="de" lang="de">um 2 Jahre älter</span>, на 2 года старше</span></li></ul></article>
     </div>
+    <figure class="vz rv" style="margin-top:clamp(28px,3.6vw,48px)">
+      <div class="vz-two">
+        <div class="vz-pn">
+          <div class="vz-stage">
+            <svg viewBox="0 0 500 320" aria-hidden="true">
+              <rect width="500" height="320" fill="#F4F5F7"/>
+              <rect y="240" width="500" height="80" fill="#E7E8EC"/>
+              <path d="M40 262h420" stroke="#1D1D21" stroke-width="7" stroke-linecap="round"/>
+              <path d="M70 250v24M400 250v24" stroke="#1D1D21" stroke-width="7" stroke-linecap="round"/>
+              <path d="M110 200h236" stroke="#EE2D32" stroke-width="6" stroke-linecap="round" stroke-dasharray="3 16"/>
+              <path d="M340 186l22 14-22 14" fill="none" stroke="#EE2D32" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+              <g><rect x="50" y="210" width="44" height="30" rx="14" fill="#FFC11E"/><circle cx="72" cy="190" r="23" fill="#F0C7A6"/><circle cx="80" cy="188" r="3" fill="#1D1D21"/><circle cx="64" cy="188" r="3" fill="#1D1D21"/><path d="M66 200c4 4 9 4 12 0" fill="none" stroke="#C4574C" stroke-width="3" stroke-linecap="round"/><path d="M60 172c6-8 18-8 22 0" fill="none" stroke="#1D1D21" stroke-width="5" stroke-linecap="round"/></g>
+              <g data-vi="walk" data-d=".2"><g><rect x="385.0" y="186.0" width="12.0" height="54.0" rx="3" fill="#1D1D21"/><rect x="403.0" y="186.0" width="12.0" height="54.0" rx="3" fill="#1D1D21"/><rect x="368.5" y="159.1" width="63.0" height="66.0" rx="21.0" fill="#FFC11E"/><circle cx="400" cy="126.0" r="36.0" fill="#F0C7A6"/><path d="M364.0 124.0c-4.7 -46.8 72.0 -55.8 75.6 -6.5c-16.2 -18.0 -52.2 -23.4 -75.6 6.5z" fill="#1D1D21"/><circle cx="413.7" cy="128.9" r="4.3" fill="#1D1D21"/><circle cx="387.0" cy="128.9" r="4.3" fill="#1D1D21"/><path d="M390.6 143.3c7.2 7.2 15.8 7.2 20.2 0" fill="none" stroke="#C4574C" stroke-width="3" stroke-linecap="round"/></g></g>
+              <g data-vi="pop" data-d="1.45"><path d="M452 240V88" stroke="#1D1D21" stroke-width="7" stroke-linecap="round"/><path d="M452 88h44l-13 16 13 16h-44z" fill="#FFC11E"/></g>
+            </svg>
+            <span class="vz-at vz-tag r" lang="de" style="--x:68%;--y:12%" data-vi="pop" data-d="1.5">mit 20 Jahren</span>
+            <span class="vz-at vz-tag w" style="--x:14%;--y:90%;--mx:17%">рождение</span>
+            <span class="vz-at vz-tag w" style="--x:50%;--y:90%">20 лет</span>
+          </div>
+          <div class="vz-cap"><b>В 20 лет.</b><span>Считаем твой возраст.</span></div>
+        </div>
+        <div class="vz-pn">
+          <div class="vz-stage">
+            <svg viewBox="0 0 500 320" aria-hidden="true">
+              <rect width="500" height="320" fill="#F4F5F7"/>
+              <rect y="240" width="500" height="80" fill="#E7E8EC"/>
+              <path d="M40 262h420" stroke="#1D1D21" stroke-width="7" stroke-linecap="round"/>
+              <path d="M70 250v24M400 250v24" stroke="#1D1D21" stroke-width="7" stroke-linecap="round"/>
+              <path d="M110 200h236" stroke="#EE2D32" stroke-width="6" stroke-linecap="round" stroke-dasharray="3 16"/>
+              <path d="M340 186l22 14-22 14" fill="none" stroke="#EE2D32" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+              <g><rect x="57.0" y="186.0" width="12.0" height="54.0" rx="3" fill="#1D1D21"/><rect x="75.0" y="186.0" width="12.0" height="54.0" rx="3" fill="#1D1D21"/><rect x="40.5" y="159.1" width="63.0" height="66.0" rx="21.0" fill="#FFC11E"/><circle cx="72" cy="126.0" r="36.0" fill="#F0C7A6"/><path d="M36.0 124.0c-4.7 -46.8 72.0 -55.8 75.6 -6.5c-16.2 -18.0 -52.2 -23.4 -75.6 6.5z" fill="#1D1D21"/><circle cx="85.7" cy="128.9" r="4.3" fill="#1D1D21"/><circle cx="59.0" cy="128.9" r="4.3" fill="#1D1D21"/><path d="M62.6 143.3c7.2 7.2 15.8 7.2 20.2 0" fill="none" stroke="#C4574C" stroke-width="3" stroke-linecap="round"/></g>
+              <g data-vi="walk" data-d=".2"><g><rect x="385.4" y="187.4" width="11.7" height="52.6" rx="3" fill="#1D1D21"/><rect x="402.9" y="187.4" width="11.7" height="52.6" rx="3" fill="#1D1D21"/><rect x="369.3" y="161.3" width="61.3" height="64.2" rx="20.4" fill="#FFC11E"/><circle cx="400" cy="129.04" r="35.04" fill="#F0C7A6"/><path d="M364.96 127.03999999999999c-4.6 -45.6 70.1 -54.3 73.6 -6.3c-15.8 -17.5 -50.8 -22.8 -73.6 6.3z" fill="#B9BAC2"/><circle cx="413.3" cy="131.8" r="4.2" fill="#1D1D21"/><circle cx="387.4" cy="131.8" r="4.2" fill="#1D1D21"/><path d="M390.9 145.9c7.0 7.0 15.4 7.0 19.6 0" fill="none" stroke="#C4574C" stroke-width="3" stroke-linecap="round"/><path d="M430 238c0-40 2-58 2-76" stroke="#1D1D21" stroke-width="6" stroke-linecap="round" fill="none"/><path d="M432 162c-10-2-14-8-14-12" stroke="#1D1D21" stroke-width="6" fill="none" stroke-linecap="round"/></g></g>
+              <g data-vi="pop" data-d="1.45"><path d="M452 240V88" stroke="#1D1D21" stroke-width="7" stroke-linecap="round"/><path d="M452 88h44l-13 16 13 16h-44z" fill="#FFC11E"/></g>
+            </svg>
+            <span class="vz-at vz-tag r" lang="de" style="--x:68%;--y:12%" data-vi="pop" data-d="1.5">in 20 Jahren</span>
+            <span class="vz-at vz-tag w" style="--x:14%;--y:90%;--mx:17%">сегодня</span>
+            <span class="vz-at vz-tag w" style="--x:50%;--y:90%">20 лет</span>
+          </div>
+          <div class="vz-cap"><b>Через 20 лет.</b><span>Считаем от сегодня.</span></div>
+        </div>
+      </div>
+      <figcaption><span class="de" lang="de">mit</span> отмечает возраст. <span class="de" lang="de">in</span> отправляет в будущее.</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -827,6 +1027,20 @@ function appInit(){
 
   /* dock */
   var dk=$('#dock'),ps=$('.prices'); if(dk&&ps&&'IntersectionObserver' in window){ var a=false,b=false; function up(){ var s=a&&!b; dk.classList.toggle('show',s); dk.setAttribute('aria-hidden',!s); $('a',dk).tabIndex=s?0:-1; } new IntersectionObserver(function(e){ a=!e[0].isIntersecting&&e[0].boundingClientRect.top<0; up(); }).observe($('.hero')); new IntersectionObserver(function(e){ b=e[0].isIntersecting; up(); }).observe(ps); }
+  if(G && !reduce){
+    var vzFrom = {pop:{scale:.55, y:12, duration:.55, ease:'back.out(2.2)'}, up:{y:46, duration:.7, ease:'power3.out'}, left:{x:-70, duration:.75, ease:'power3.out'}, right:{x:70, duration:.75, ease:'power3.out'}, walk:{x:-160, duration:1.5, ease:'power2.inOut'}, wag:{rotation:-14, duration:.5, yoyo:true, repeat:3, ease:'sine.inOut'}};
+    $$('.vz').forEach(function(v){
+      var parts = $$('[data-vi]', v);
+      ScrollTrigger.create({trigger:v, start:'top 80%', once:true, onEnter:function(){
+        parts.forEach(function(el, i){
+          var p = vzFrom[el.dataset.vi], o = {}; for(var k in p) o[k] = p[k];
+          o.delay = el.dataset.d ? +el.dataset.d : i * .1;
+          o.transformOrigin = '50% 100%';
+          G.from(el, o);
+        });
+      }});
+    });
+  }
   if(G){ addEventListener('load',function(){ ScrollTrigger.refresh(); }); if(document.fonts&&document.fonts.ready) document.fonts.ready.then(function(){ ScrollTrigger.refresh(); }); }
 }
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',appInit); else appInit();
